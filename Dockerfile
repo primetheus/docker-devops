@@ -1,8 +1,8 @@
 FROM ubuntu:18.04
 
 COPY ./banner.txt /banner.txt
-COPY ./profile /.profile
-RUN chmod 775 /.profile
+COPY ./profile /.bash_profile
+RUN chmod 775 /.bash_profile
 
 RUN apt -y update && \
     apt -y install vim && \
@@ -26,6 +26,6 @@ RUN apt -y update && \
     curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
-    rm -f /terraform*.zip
+    rm -f /terraform*.zip /aws*.zip
 
-ENTRYPOINT "/.profile"
+ENTRYPOINT "/.bash_profile" && /bin/bash

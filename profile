@@ -1,6 +1,6 @@
 cat banner.txt
 echo
-echo "\e[1;3;31m Installed Tools / Version \e[0m"
+echo "\e[1;3;31m Tools / Version \e[0m"
 echo "---------------------------" 
 python -V
 pip --version
