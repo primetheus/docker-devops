@@ -1,0 +1,15 @@
+Python
+pip 
+python
+git 
+ansible
+azure-cli
+Terraform 
+packer
+go 
+ruby 
+node 
+npm 
+openjdk 
+Maven 
+aws-cli
