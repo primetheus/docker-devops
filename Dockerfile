@@ -1,8 +1,9 @@
 FROM ubuntu:18.04
 
 COPY ./banner.txt /banner.txt
-COPY ./profile /.bash_profile
-RUN chmod 775 /.bash_profile
+COPY ./welcome.sh /etc/profile.d/
+RUN echo "PS1='\u:[$(date +%H:%M:%S)]\w > '" >> /etc/profile
+RUN mkdir /.ssh && mkdir /.azure && touch /.azure/credentials
 
 RUN apt -y update && \
     apt -y install vim && \
@@ -14,6 +15,7 @@ RUN apt -y update && \
     apt -y install ruby && \
     apt -y install npm && \
     apt-get -y install openjdk-8-jdk && \
+    apt -y install maven && \
     wget https://releases.hashicorp.com/terraform/0.12.17/terraform_0.12.17_linux_amd64.zip && \
     unzip terraform_0.12.17_linux_amd64.zip && \ 
     mv terraform /usr/local/bin/ && \
@@ -26,6 +28,6 @@ RUN apt -y update && \
     curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
     unzip awscliv2.zip && \
     ./aws/install && \
-    rm -f /terraform*.zip /aws*.zip
+    rm -rf /terraform*.zip /aws*.zip /aws
 
-ENTRYPOINT "/.bash_profile" && /bin/bash
+ENTRYPOINT "/etc/profile.d/welcome.sh" && /bin/bash
